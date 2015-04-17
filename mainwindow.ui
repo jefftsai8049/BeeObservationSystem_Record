@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>891</width>
-    <height>628</height>
+    <width>353</width>
+    <height>547</height>
    </rect>
   </property>
   <property name="font">
@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>HOS Record Program ver1.0</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="connect_camera_pushButton">
@@ -52,8 +52,8 @@
    <widget class="QSpinBox" name="cam_ID_L_spinBox">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>200</y>
+      <x>20</x>
+      <y>210</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -68,8 +68,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>160</y>
+      <x>20</x>
+      <y>170</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -81,8 +81,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>250</y>
+      <x>20</x>
+      <y>260</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -94,8 +94,8 @@
    <widget class="QSpinBox" name="cam_ID_M_spinBox">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>290</y>
+      <x>20</x>
+      <y>300</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -110,8 +110,8 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>340</y>
+      <x>20</x>
+      <y>350</y>
       <width>121</width>
       <height>31</height>
      </rect>
@@ -123,8 +123,8 @@
    <widget class="QSpinBox" name="cam_ID_R_spinBox">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>380</y>
+      <x>20</x>
+      <y>390</y>
       <width>101</width>
       <height>41</height>
      </rect>
@@ -142,7 +142,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>180</x>
       <y>10</y>
       <width>151</width>
       <height>51</height>
@@ -158,7 +158,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>180</x>
       <y>70</y>
       <width>151</width>
       <height>51</height>
@@ -171,9 +171,9 @@
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>510</y>
-      <width>531</width>
+      <x>20</x>
+      <y>440</y>
+      <width>311</width>
       <height>51</height>
      </rect>
     </property>
@@ -184,9 +184,9 @@
    <widget class="QSpinBox" name="record_time_spinBox">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>200</y>
-      <width>81</width>
+      <x>190</x>
+      <y>170</y>
+      <width>101</width>
       <height>41</height>
      </rect>
     </property>
@@ -199,12 +199,15 @@
     <property name="singleStep">
      <number>5</number>
     </property>
+    <property name="value">
+     <number>30</number>
+    </property>
    </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>170</y>
+      <x>190</x>
+      <y>130</y>
       <width>101</width>
       <height>31</height>
      </rect>
@@ -213,33 +216,17 @@
      <string>Record Time</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="stitch_image_pushButton">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>70</y>
-      <width>181</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Stitch Image</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="get_image_pushButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>10</y>
-      <width>181</width>
+      <x>180</x>
+      <y>230</y>
+      <width>141</width>
       <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>Get Image</string>
+     <string>Snapshot</string>
     </property>
    </widget>
    <widget class="QCheckBox" name="show_image_checkBox">
@@ -248,49 +235,14 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>270</y>
-      <width>171</width>
+      <x>20</x>
+      <y>130</y>
+      <width>151</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Show Image</string>
-    </property>
-   </widget>
-   <widget class="QSpinBox" name="stitich_match_point_spinBox">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>290</y>
-      <width>121</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="maximum">
-     <number>1000</number>
-    </property>
-    <property name="singleStep">
-     <number>100</number>
-    </property>
-    <property name="value">
-     <number>500</number>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="warp_image_pushButton">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>520</x>
-      <y>10</y>
-      <width>181</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Warp Image</string>
     </property>
    </widget>
   </widget>
@@ -299,7 +251,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>891</width>
+     <width>353</width>
      <height>21</height>
     </rect>
    </property>

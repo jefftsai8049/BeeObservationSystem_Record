@@ -48,13 +48,11 @@ private slots:
 
     void on_video_stop_pushButton_clicked();
 
-    void on_stitch_image_pushButton_clicked();
-
     void on_get_image_pushButton_clicked();
 
     void on_show_image_checkBox_clicked();
 
-    void on_warp_image_pushButton_clicked();
+
 
 private:
     Ui::MainWindow *ui;

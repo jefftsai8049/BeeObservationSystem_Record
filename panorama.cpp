@@ -34,7 +34,7 @@ void panorama::calaulateHomography(const cv::Mat &sceneImg, const cv::Mat &objec
     std::vector<cv::DMatch> matches;
     flanMatcher.match(descriptorsObject, descriptorsScene, matches);
     double max_dist = 0;
-    double min_dist = 100;
+    double min_dist = 75;
 
 
     for(int i = 0; i < descriptorsObject.rows; i++)
