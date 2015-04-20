@@ -36,6 +36,8 @@ public:
 private slots:
     void capReceive(const std::vector<cv::Mat> &src);
 
+    void fpsReceive(const int &time);
+
     void recordClockTimeout();
 
     void getCameraImage();
@@ -54,6 +56,8 @@ private slots:
 
 
 
+    void on_calibration_checkBox_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -62,8 +66,6 @@ private:
     video_record *vr;
 
     camera_calibration *cc;
-
-    panorama *pano;
 
     QDateTime *recordTime;
 

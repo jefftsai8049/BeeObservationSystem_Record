@@ -10,13 +10,11 @@ MainWindow::MainWindow(QWidget *parent) :
     cam = 0;
 
     vr = new video_record(cv::Size(3600,1600));
+//    connect(vr,SIGNAL(msgSend(QString)),this,SLOT(vrReceive(QString)));
     recordTime = new QDateTime;
 
     progress = 0;
     ui->progressBar->setValue((int)progress);
-
-    pano = new panorama;
-    cc = new camera_calibration;
 
     getImageStatus = false;
     getImageOK =false;
@@ -68,6 +66,7 @@ void MainWindow::capReceive(const std::vector<cv::Mat> &src)
     }
 
     cv::Mat dst;
+
     dst.create(src[0].rows,src[0].cols+src[1].cols+src[2].cols,src[0].type());
     cv::Mat part = dst(cv::Rect(0,0,src[0].cols,src[0].rows));
     src[0].copyTo(part);
@@ -75,6 +74,8 @@ void MainWindow::capReceive(const std::vector<cv::Mat> &src)
     src[1].copyTo(part);
     part = dst(cv::Rect(src[0].cols+src[1].cols,0,src[2].cols,src[2].rows));
     src[2].copyTo(part);
+    //qDebug() << vr->isVideoStart();
+
 
     if(ui->show_image_checkBox->isChecked())
     {
@@ -91,16 +92,19 @@ void MainWindow::capReceive(const std::vector<cv::Mat> &src)
     }
 }
 
+void MainWindow::fpsReceive(const int &time)
+{
+    ui->fps_lcdNumber->display(1000/time);
+}
+
 void MainWindow::recordClockTimeout()
 {
-    qDebug() << "record clock restart!";
 
     progress = 0;
     ui->progressBar->setValue(progress);
 
     if(vr->isVideoStart())
     {
-        qDebug() << "end";
         vr->videoEnd();
     }
 
@@ -108,7 +112,7 @@ void MainWindow::recordClockTimeout()
     QString fileName = recordTime->toString("yy-MM-dd-HH-mm-ss");
 
     vr->videoStart("video/"+fileName+"_raw.avi");
-    //    ui->statusBar->showMessage(fileName+"_raw.avi is recording...");
+    ui->statusBar->showMessage(fileName+"_raw.avi is recording...");
 }
 
 void MainWindow::getCameraImage()
@@ -124,6 +128,7 @@ void MainWindow::on_connect_camera_pushButton_clicked()
     ui->connect_camera_pushButton->setEnabled(0);
     ui->disconnect_camera_pushButton->setEnabled(1);
     ui->video_record_pushButton->setEnabled(1);
+    ui->get_image_pushButton->setEnabled(1);
 
 
     std::vector<int> camPos;
@@ -135,6 +140,7 @@ void MainWindow::on_connect_camera_pushButton_clicked()
     if(cam != 0)
     {
         connect(cam,SIGNAL(capSend(std::vector<cv::Mat>)),this,SLOT(capReceive(std::vector<cv::Mat>)));
+        connect(cam,SIGNAL(fpsSend(int)),this,SLOT(fpsReceive(int)));
         cam->start();
         ui->statusBar->showMessage("Camera Connected!");
     }
@@ -156,7 +162,7 @@ void MainWindow::on_disconnect_camera_pushButton_clicked()
 
     while(cam->isCamEnd() == true)
     {
-
+        disconnect(cam,SIGNAL(fpsSend(int)),this,SLOT(fpsReceive(int)));
         disconnect(cam,SIGNAL(capSend(std::vector<cv::Mat>)),this,SLOT(capReceive(std::vector<cv::Mat>)));
         delete cam;
     }
@@ -211,4 +217,9 @@ void MainWindow::on_show_image_checkBox_clicked()
     {
         cv::destroyAllWindows();
     }
+}
+
+void MainWindow::on_calibration_checkBox_clicked()
+{
+    cam->setCalibration(ui->calibration_checkBox->isChecked());
 }

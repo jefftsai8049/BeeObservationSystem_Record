@@ -19,25 +19,23 @@ public:
     bool isCamEnd();
     bool camStatus();
     void setUndistorted(const bool &status);
+    void setCalibration(const bool &status);
 signals:
     void capSend(const std::vector<cv::Mat> &src);
+    void fpsSend(const int &time);
 public slots:
 
 private:
     cv::VideoCapture *capL;
     cv::VideoCapture *capM;
     cv::VideoCapture *capR;
-//    img_process *imgProcess;
     camera_calibration *cc;
-
-//    std::string cap_name;
     std::vector<int> camPos;
     std::vector<cv::Mat> capFrame;
     bool capStatus;
     bool capEnd;
-
+    bool calibration;
     bool calibrationLoaded;
-
     void run();
 
 

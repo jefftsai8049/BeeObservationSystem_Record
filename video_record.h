@@ -29,7 +29,9 @@ private:
 
 
     bool status;
+    bool end;
     void run();
+    void setEnd();
 
 };
 
