@@ -6,6 +6,7 @@ video_record::video_record(const cv::Size &size)
     status = 0;
     writer = 0;
     end = 0;
+    writer = new cv::VideoWriter;
 }
 
 video_record::~video_record()
@@ -16,9 +17,10 @@ video_record::~video_record()
 void video_record::videoStart(const QString &fileName)
 {
     qDebug() <<"video file:" << fileName;
-    writer = new cv::VideoWriter(fileName.toStdString(),cv::VideoWriter::fourcc('X','V','I','D'),12,this->imgSize,true);
+    //writer = new cv::VideoWriter(fileName.toStdString(),cv::VideoWriter::fourcc('X','V','I','D'),12,this->imgSize,true);
     //emit msgSend("Video Writer Status : "+QString::number(writer->isOpened()));
-    //writer->open(fileName.toStdString(),cv::VideoWriter::fourcc('X','V','I','D'),12,this->imgSize,true);
+    writer->open(fileName.toStdString(),cv::VideoWriter::fourcc('X','V','I','D'),12,this->imgSize,true);
+    end = 0;
 
 }
 
@@ -52,6 +54,7 @@ void video_record::run()
 {
     if(end == 1){
         writer->release();
+        qDebug() << "writer release";
     }
     else
     {

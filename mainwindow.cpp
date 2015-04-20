@@ -10,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     cam = 0;
 
     vr = new video_record(cv::Size(3600,1600));
-//    connect(vr,SIGNAL(msgSend(QString)),this,SLOT(vrReceive(QString)));
+    //    connect(vr,SIGNAL(msgSend(QString)),this,SLOT(vrReceive(QString)));
     recordTime = new QDateTime;
 
     progress = 0;
@@ -83,8 +83,10 @@ void MainWindow::capReceive(const std::vector<cv::Mat> &src)
         cv::resize(dst,resizeDst,cv::Size(1800,800));
         cv::imshow("dst",resizeDst);
     }
+
     if(vr->isVideoStart())
     {
+//        qDebug() << progress;
         progress = progress+100.0/ui->record_time_spinBox->value()/60.0/12.0;
         ui->progressBar->setValue(progress);
         vr->videoWrite(dst);
@@ -105,8 +107,14 @@ void MainWindow::recordClockTimeout()
 
     if(vr->isVideoStart())
     {
+//        qDebug() <<vr->isVideoStart();
+//        recordClock->stop();
         vr->videoEnd();
+//        qDebug() << vr->isRunning();
+        while(vr->isRunning()){}
     }
+
+
 
     *recordTime = recordTime->currentDateTime();
     QString fileName = recordTime->toString("yy-MM-dd-HH-mm-ss");
